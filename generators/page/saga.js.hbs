@@ -1,0 +1,59 @@
+/***
+ * {{ properCase name }}  sagas
+ */
+
+import {
+  take, call, apply, folk, delay, put, select, takeLatest
+} from 'redux-saga/effects';
+
+
+import {
+  COMPONENT_WILL_MOUNT,
+  COMPONENT_DID_MOUNT,
+  COMPONENT_WILL_UNMOUNT,
+} from '../constants/{{ camelCase name }}'
+
+import makeSelect{{ properCase name }} from '../selectors/{{ camelCase name }}'
+
+
+export function* componentWillMountSaga() {
+  try {
+    console.log('{{ properCase name }} COMPONENT_WILL_MOUNT')
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export function* componentDidMountSaga() {
+  try {
+    console.log('{{ properCase name }} COMPONENT_DID_MOUNT')
+    const data = yield select(makeSelect{{ properCase name }}())
+    console.log(data)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export function* componentWillUnMountSaga() {
+  try {
+    console.log('{{ properCase name }} COMPONENT_WILL_UN_MOUNT')
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+
+
+export default function* {{ properCase name }}Saga() {
+  yield takeLatest(COMPONENT_WILL_MOUNT,componentWillMountSaga)
+  yield takeLatest(COMPONENT_DID_MOUNT,componentDidMountSaga)
+  yield takeLatest(COMPONENT_WILL_UNMOUNT,componentWillUnMountSaga)
+}
+
+
+
+
+
+
+
+

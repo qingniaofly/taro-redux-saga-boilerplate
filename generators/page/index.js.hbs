@@ -1,0 +1,72 @@
+import Taro, { Component } from '@tarojs/taro'
+import { View, Button, Text } from '@tarojs/components'
+import { connect } from '@tarojs/redux'
+
+import {store} from '../../app'
+
+import addReducer from '../../utils/addReducer'
+import addSaga from '../../utils/addSaga'
+
+import reducer from '../../reducers/{{ camelCase name }}'
+import saga from '../../sagas/{{ camelCase name }}'
+
+import {
+  componentWillMountAction,
+  componentDidMountAction,
+  componentWillUnMountAction,
+} from '../../actions/{{ camelCase name }}'
+
+import './index.css'
+
+addReducer(store,{key: '{{ camelCase name }}',reducer })
+addSaga(store,{key: '{{ camelCase name }}',saga })
+
+@connect(({ {{ camelCase name }} }) => ({
+{{ camelCase name }}
+}), (dispatch) => ({
+  componentWillMountAction(data){
+    dispatch(componentWillMountAction(data))
+  },
+  componentDidMountAction(data){
+    dispatch(componentDidMountAction(data))
+  },
+  componentWillUnMountAction(data){
+    dispatch(componentWillUnMountAction(data))
+  },
+}))
+
+class {{ properCase name }} extends Component {
+
+  componentWillMount() {
+    this.props.componentWillMountAction()
+  }
+
+  componentDidMount() {
+    const data = {
+      a:1,b:2,c:3
+    }
+    this.props.componentDidMountAction(data)
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {}
+
+  componentWillUnmount () {
+    this.props.componentWillUnMountAction()
+  }
+
+  componentDidShow () { }
+
+  componentDidHide () { }
+
+  render () {
+    return (
+      <View className='{{ camelCase name }}'>
+        <View><Text>Hello, World</Text></View>
+        <View><Text>我是{{ camelCase name }}</Text></View>
+      </View>
+    )
+  }
+}
+
+
+export default {{ properCase name }}
